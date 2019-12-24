@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/chriswade/rest-api/data"
+	"github.com/chriswade/rest-api/database"
 	"github.com/gorilla/mux"
 )
 
@@ -36,7 +37,7 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	var book data.Book
 	_ = json.NewDecoder(r.Body).Decode(&book)
 	book.ID = strconv.Itoa(rand.Intn(10000000))
-	data.Books = append(data.Books, book)
+	database.Add(book)
 	json.NewEncoder(w).Encode(book)
 
 }

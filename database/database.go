@@ -34,19 +34,19 @@ func Connect() {
 	fmt.Println("Successfully connected!")
 }
 
-func Add(item data.Book) {
+func Add(book data.Book) {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
 	sqlStatement := `
-	INSERT INTO users (age, email, first_name, last_name)
+	INSERT INTO books (id, isbn, title, author)
 	VALUES ($1, $2, $3, $4)
 	RETURNING id`
 	id := 0
-	err = db.QueryRow(sqlStatement, 21, "lee@we.com", "Lee", "We").Scan(&id)
+	err = db.QueryRow(sqlStatement, book.ID, book.Isbn, book.Title, book.Author).Scan(&id)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("New record ID is:", id)
+	fmt.Println("Book added:", book.Title)
 }
