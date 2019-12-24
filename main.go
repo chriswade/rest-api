@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/chriswade/rest-api/data"
+	"github.com/chriswade/rest-api/database"
 	"github.com/chriswade/rest-api/router"
 	"github.com/gorilla/mux"
 )
@@ -16,6 +17,8 @@ func main() {
 	//mock data
 	data.Books = append(data.Books, data.Book{ID: "1", Isbn: "123", Title: "book1", Author: &data.Author{Firstname: "chris", Lastname: "wade"}})
 	data.Books = append(data.Books, data.Book{ID: "2", Isbn: "124", Title: "book2", Author: &data.Author{Firstname: "natalie", Lastname: "hammond"}})
+
+	database.Connect()
 
 	// Create route handers
 	r.HandleFunc("/api/books", router.GetBooks).Methods("GET")
