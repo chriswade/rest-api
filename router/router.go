@@ -2,9 +2,7 @@ package router
 
 import (
 	"encoding/json"
-	"math/rand"
 	"net/http"
-	"strconv"
 
 	"github.com/chriswade/rest-api/data"
 	"github.com/chriswade/rest-api/database"
@@ -36,7 +34,6 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var book data.Book
 	_ = json.NewDecoder(r.Body).Decode(&book)
-	book.ID = strconv.Itoa(rand.Intn(10000000))
 	database.Add(book)
 	json.NewEncoder(w).Encode(book)
 
