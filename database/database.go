@@ -34,7 +34,6 @@ func Connect() {
 	fmt.Println("Successfully connected!")
 }
 
-//Add book to books table
 func Add(book data.Book) {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
