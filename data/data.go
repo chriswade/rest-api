@@ -2,10 +2,10 @@ package data
 
 //Book Struct (Model/class/interface)
 type Book struct {
-	ID       string  `json:"id"`
-	Isbn     string  `json:"isbn"`
+	ID       int     `json:"id"`
+	Isbn     int     `json:"isbn"`
 	Title    string  `json:"title"`
-	AuthorID string  `json:"authorid"`
+	AuthorID int     `json:"authorid"`
 	Author   *Author `json:"author"`
 }
 
